@@ -1,37 +1,196 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Todo App with Next.js and Express
 
-## Getting Started
+This is a full-stack Todo application built with Next.js for the frontend and Express/MongoDB for the backend. The application allows users to create, read, update, and delete todos, with server-side rendering capabilities.
 
-First, run the development server:
+![Todo App](https://via.placeholder.com/800x400?text=Todo+App)
 
+## Features
+
+- Create new todos with title and description
+- View a list of todos with pagination
+- Select and edit todos
+- Delete todos
+- Responsive design for mobile and desktop
+- Server-side rendering for improved performance
+- MongoDB database integration
+
+## Tech Stack
+
+### Frontend
+- Next.js (App Router)
+- React
+- Tailwind CSS
+- Axios for API requests
+- React Icons
+- date-fns for date formatting
+
+### Backend
+- Node.js
+- Express
+- MongoDB with Mongoose
+- Cors for cross-origin requests
+- Dotenv for environment variables
+
+## Installation
+
+### Prerequisites
+- Node.js (v14 or later)
+- MongoDB Atlas account (or local MongoDB installation)
+
+### Setup Instructions
+
+#### 1. Clone the repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/yourusername/todo-app.git
+cd todo-app
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### 2. Frontend Setup
+```bash
+# Install dependencies
+npm install
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Create a .env.local file in the root directory
+touch .env.local
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Add the following to your .env.local file:
+```
+NEXT_PUBLIC_API_URL=http://localhost:5000/api
+```
 
-## Learn More
+#### 3. Backend Setup
+```bash
+# Create and navigate to backend directory
+mkdir -p backend
+cd backend
 
-To learn more about Next.js, take a look at the following resources:
+# Initialize package.json
+npm init -y
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Install dependencies
+npm install express mongoose cors dotenv
+npm install --save-dev nodemon
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Create a .env file in the backend directory:
+```bash
+touch .env
+```
 
-## Deploy on Vercel
+Add the following to your backend/.env file (replace with your MongoDB URI):
+```
+PORT=5000
+MONGO_URI=mongodb+srv://<username>:<password>@cluster0.example.mongodb.net/todo-app?retryWrites=true&w=majority
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+#### 4. Update Backend package.json
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# TODO
+Add the following scripts to your backend/package.json:
+```json
+"scripts": {
+  "start": "node server.js",
+  "dev": "nodemon server.js"
+}
+```
+
+## Project Structure
+
+```
+todo-app/
+├── src/
+│   ├── app/
+│   │   ├── components/
+│   │   │   ├── CreateTodoForm.jsx
+│   │   │   ├── TodoDetail.jsx
+│   │   │   ├── TodoItem.jsx
+│   │   │   └── TodoList.jsx
+│   │   ├── home/
+│   │   │   └── page.js
+│   │   ├── services/
+│   │   │   └── api.js
+│   │   ├── globals.css
+│   │   ├── layout.js
+│   │   └── page.js
+│   └── ...
+├── backend/
+│   ├── config/
+│   │   └── db.js
+│   ├── controllers/
+│   │   └── todoController.js
+│   ├── models/
+│   │   └── todoModel.js
+│   ├── routes/
+│   │   └── todoRoutes.js
+│   ├── .env
+│   ├── package.json
+│   └── server.js
+├── .env.local
+├── package.json
+└── README.md
+```
+
+## Running the Application
+
+### Backend
+```bash
+cd backend
+npm run dev
+```
+
+### Frontend
+In a separate terminal:
+```bash
+cd todo-app  # if not already in the main directory
+npm run dev
+```
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | /api/todos | Get all todos (paginated) |
+| GET | /api/todos/:id | Get a specific todo |
+| POST | /api/todos | Create a new todo |
+| PUT | /api/todos/:id | Update a todo |
+| DELETE | /api/todos/:id | Delete a todo |
+
+## MongoDB Setup
+
+### Local MongoDB
+If you're using a local MongoDB installation, make sure it's running before starting the backend server.
+
+### MongoDB Atlas
+1. Create a MongoDB Atlas account if you don't already have one
+2. Create a new cluster
+3. Add your IP address to the IP whitelist
+4. Create a database user with appropriate permissions
+5. Get your connection string and update it in your .env file
+
+## Common Issues & Troubleshooting
+
+1. **MongoDB Connection Error**
+   - Make sure your MongoDB is running
+   - Check if your connection string is correct
+   - Verify that your IP is whitelisted in MongoDB Atlas
+
+2. **API 500 Error**
+   - Check your backend terminal for detailed error messages
+   - Verify that your backend server is running
+   - Make sure your MongoDB connection is successful
+
+3. **CORS Error**
+   - Ensure your backend has the correct CORS configuration
+   - Check if the frontend API URL is correct
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature-name`
+3. Commit your changes: `git commit -m 'Add some feature'`
+4. Push to the branch: `git push origin feature-name`
+5. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
