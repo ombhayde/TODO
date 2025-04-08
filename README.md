@@ -2,7 +2,8 @@
 
 This is a full-stack Todo application built with Next.js for the frontend and Express/MongoDB for the backend. The application allows users to create, read, update, and delete todos, with server-side rendering capabilities.
 
-![Todo App](https://via.placeholder.com/800x400?text=Todo+App)
+<img src="/todo.png" alt="Todo App Banner" />
+
 
 ## Features
 
